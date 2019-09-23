@@ -9,7 +9,6 @@ python3 fix_file_number_order.py -d .
 .
 .
 .
-.
 15.ccc.mp4 -> 015.ccc.mp4
 
 ```
@@ -35,12 +34,14 @@ fix_file_number_order.py -ad ./
 **change padding**
 ```
 fix_file_number_order.py -ad ./  -p  10
+```
+![padding](https://github.com/zk4/fix_file_number_order/blob/master//padding.jpg)
 
-# you can also shrink it back
+**shrink it back**
+```
 fix_file_number_order.py -ad ./  -p  1
 
 ```
-![padding](https://github.com/zk4/fix_file_number_order/blob/master//padding.jpg)
 ![shrink](https://github.com/zk4/fix_file_number_order/blob/master//shrink.jpg)
 ## help
 ```  bash
