@@ -53,6 +53,7 @@ fix_file_number_order.py -d . -r '(\d+)(?=.mp4)' --head
 ## help
 ```  bash
 usage: fix_file_number_order.py [-h] -d DIRECTORY [-r REGEX] [-p PADDING] [-a]
+                                [--head]
 
 Ex: 
     # change current directory 
