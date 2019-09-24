@@ -9,15 +9,21 @@ from colorama import init
 from termcolor import colored 
 from colorama import Fore, Back, Style 
 
-def padding(dirpath,rawFileName,numbermatching,apply,fill):
+def padding(dirpath,rawFileName,numbermatching,apply,fill,head):
     m = re.search(numbermatching,rawFileName)
     if m :
         start =m.start()
         end = m.end()
         if fill < (end-start):
             start = end - fill
+
         formatNum = rawFileName[start:end].zfill(fill)
-        targetFileName = re.sub(re.compile(numbermatching),formatNum,rawFileName)
+        if head:
+            targetFileName = formatNum+"-"+rawFileName
+            print(targetFileName)
+        else:
+            targetFileName = re.sub(re.compile(numbermatching),formatNum,rawFileName)
+
         print(colored(rawFileName, 'red'),"->", colored(targetFileName, 'green'))
         if apply:
             os.rename(dirpath+"/"+rawFileName, dirpath+"/"+targetFileName)
@@ -34,7 +40,7 @@ def main(args):
     for (dirpath,dirnames,filenames) in  paths(args.directory):
         print(dirpath+"/")
         for filename in filenames:
-            padding(dirpath,filename,args.regex,args.apply,args.padding)
+            padding(dirpath,filename,args.regex,args.apply,args.padding,args.head)
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(
@@ -49,8 +55,9 @@ Ex:
     parser.add_argument("-d",'--directory', type=str, required=True, help='filenames in directory to replace')
     parser.add_argument("-r",'--regex', type=str, default="^(\d+)", help='number regex to locate')
     parser.add_argument("-p",'--padding', type=int, default=3, help='zero padding number')
-
+    
     parser.add_argument("-a",'--apply', action='store_true',  help='apply,  real chanage the file name! ')
+    parser.add_argument('--head', action='store_true',  help='move index to head, use with -r ')
 
     args = parser.parse_args()
     if not args.apply:
