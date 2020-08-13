@@ -9,7 +9,7 @@ from colorama import init
 from termcolor import colored 
 from colorama import Fore, Back, Style 
 
-def padding(dirpath,rawFileName,numbermatching,apply,fill,head):
+def padding(dirpath,rawFileName,numbermatching,applied,fill,head):
     m = re.search(numbermatching,rawFileName)
     if m :
         start =m.start()
@@ -25,7 +25,7 @@ def padding(dirpath,rawFileName,numbermatching,apply,fill,head):
             targetFileName = re.sub(re.compile(numbermatching),formatNum,rawFileName)
 
         print(colored(rawFileName, 'red'),"->", colored(targetFileName, 'green'))
-        if apply:
+        if applied:
             os.rename(dirpath+"/"+rawFileName, dirpath+"/"+targetFileName)
     else:
         print(rawFileName + " not parsed")
